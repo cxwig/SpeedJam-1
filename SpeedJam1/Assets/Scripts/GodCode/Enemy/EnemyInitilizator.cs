@@ -7,10 +7,13 @@ public class EnemyInitilizator : MonoBehaviour
 {
     private Enemy _enemy;
     public IGetterMove GetterMove { get; private set; }
-    private void Awake()
+    private void Start()
     {
         GetterMove = GetComponent<IGetterMove>();
         _enemy = GetComponent<Enemy>();
+    }
+    private void LateUpdate()
+    {
         Initialize();
     }
     public void Initialize()

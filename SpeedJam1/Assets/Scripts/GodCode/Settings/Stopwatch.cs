@@ -9,6 +9,5 @@ public class Stopwatch : MonoBehaviour
     private void Update()
     {
         CurrentTime += Time.deltaTime;
-        
     }
 }

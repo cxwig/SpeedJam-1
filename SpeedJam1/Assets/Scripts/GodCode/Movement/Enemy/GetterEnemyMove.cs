@@ -6,15 +6,31 @@ using UnityEngine.AI;
 public class GetterEnemyMove : MonoBehaviour, IGetterMove
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _range;
     [SerializeField] private Transform _target;
+    [SerializeField] private Transform _firstPoint;
+    [SerializeField] private Transform _secondPoint;
     [SerializeField] private NavMeshAgent _navMeshAgent;
+    private IMove _previusMove;
     public IMove Move { get; private set; }
-    public IMove GetMove()
+    private void Awake()
     {
-        if (Move == null)
+        GetChangerEnemyState();
+    }
+    private void GetChangerEnemyState()
+    {
+        ChangerEnemyState changerEnemyState = new ChangerEnemyState(transform, _target, _range, new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target, new ReturnerSpeed(_speed))),
+new PlayerMovement(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
+        IMove move = changerEnemyState.GetMove();
+        if (Move == null || move.GetType() != Move.GetType())
         {
-            Move = new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target,new ReturnerSpeed(_speed)));
+            _navMeshAgent.enabled = move is EnemyMove;
+            Move = move;
         }
-        return Move;
+    }
+    public IMove GetMove() => Move;
+    private void Update()
+    {
+        GetChangerEnemyState();
     }
 }
