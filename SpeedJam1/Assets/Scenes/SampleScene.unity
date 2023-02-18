@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 564001260}
   - component: {fileID: 564001259}
   m_Layer: 0
-  m_Name: PowerUp (1)
+  m_Name: PowerUp1
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,7 +1331,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpText: {fileID: 451265945}
   pickupKey: 102
-  pickUpAllowed: 0
 --- !u!1 &1806298890
 GameObject:
   m_ObjectHideFlags: 0
