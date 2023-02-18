@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class _SpeedBoostPowerUps : MonoBehaviour
 {
-    [SerializeField] private float speedBoostAmount = 1.5f; // The amount by which the player's speed will be boosted
-    public float powerupDuration = 10f; // The duration of the speed boost
-    [SerializeField] private AudioClip powerupSound; // Sound effect to play when the powerup is collected
+    [SerializeField] private float speedBoostAmount = 1.5f; // Amount
+    public float powerupDuration = 10f; // The duration
+    [SerializeField] private AudioClip powerupSound; // Sound effect
     public _PlayerMovement script;
 
     private bool hasBoosted = false;
@@ -16,13 +16,13 @@ public class _SpeedBoostPowerUps : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !hasBoosted)
         {
             Debug.Log("powerup collected");
-            // Play the powerup sound
+            //sound effect
             AudioSource.PlayClipAtPoint(powerupSound, transform.position);
 
-            // Boost the player's speed
+            // Speed boost
             script.moveSpeed += speedBoostAmount;
 
-            // Start a coroutine to remove the speed boost after the powerup duration has passed
+            // Start a coroutine
             StartCoroutine(RemoveSpeedBoost());
 
             // Mark the powerup as collected
@@ -38,10 +38,8 @@ public class _SpeedBoostPowerUps : MonoBehaviour
     {
         yield return new WaitForSeconds(powerupDuration);
 
-        // Reduce the player's speed to normal
         script.moveSpeed -= speedBoostAmount;
 
-        // Destroy the powerup object
         Destroy(gameObject);
     }
 }

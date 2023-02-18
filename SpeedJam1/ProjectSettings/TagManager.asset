@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - PowerUp
+  - Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PickUp
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
