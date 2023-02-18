@@ -1,30 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangerSizeOfCamera : MonoBehaviour
+public class ChangerSizeOfCamera
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private float _increaseDuration = 2;
-    [SerializeField] private float _decreaseDuration = 1;
-    [SerializeField] private float _maxSize = 8;
-    [SerializeField] private CollectorOfPowerUps _collectorOfPowerUps;
-    private float _cameraSize;
-    private void Awake()
+    private Camera _camera;
+    public ChangerSizeOfCamera(Camera camera)
     {
-        _cameraSize = _camera.orthographicSize;
-        _collectorOfPowerUps.OnPickUp += StartIncreasingSizeOfCamera;
-        _collectorOfPowerUps.OnRemoveEffect += StartReturnuingStartSize;
+        _camera = camera;
+        CameraSize = _camera.orthographicSize;
     }
-    private void StartReturnuingStartSize()
+
+    public float CameraSize { get; private set; }
+
+    /* private void StartReturnuingStartSize()
+{
+StartCoroutine(ChangeSizeOfCamera(() => _camera.orthographicSize > _cameraSize, -1));
+}
+private void StartIncreasingSizeOfCamera()
+{
+StartCoroutine(ChangeSizeOfCamera(() => _maxSize > _camera.orthographicSize, 1));
+}*/
+    public IEnumerator ChangerSizeOfCameraByTime(Func<bool> func, float factorOfNegativity, float speed)
     {
-        StartCoroutine(DecreaseSize());
+        float time = 0;
+        while (func())
+        {
+            time += Time.deltaTime;
+            _camera.orthographicSize = _camera.orthographicSize + CameraSize * factorOfNegativity * speed * time;
+            yield return null;
+        }
+
     }
-    private void StartIncreasingSizeOfCamera()
+    public IEnumerator ChangeSizeOfCamera(Func<bool> func, float factorOfNegativity, float duration)
     {
-        StartCoroutine(IncreaseSize());
+        float time = 0;
+        while (func())
+        {
+            time += Time.deltaTime;
+            _camera.orthographicSize = _camera.orthographicSize + CameraSize * factorOfNegativity / duration * time;
+            yield return null;
+        }
     }
-    private IEnumerator DecreaseSize()
+  /*  private IEnumerator DecreaseSize()
     {
         float time = 0;
         while (_camera.orthographicSize > _cameraSize)
@@ -40,13 +59,9 @@ public class ChangerSizeOfCamera : MonoBehaviour
         while (_maxSize > _camera.orthographicSize)
         {
             time += Time.deltaTime;
-            _camera.orthographicSize = _cameraSize + _cameraSize / _increaseDuration * time; 
+            _camera.orthographicSize = _camera.orthographicSize + _cameraSize / _increaseDuration * time; 
             yield return null;
         }
-    }
-    private void OnDisable()
-    {
-        _collectorOfPowerUps.OnPickUp -= StartIncreasingSizeOfCamera;
-        _collectorOfPowerUps.OnRemoveEffect -= StartReturnuingStartSize;
-    }
+    }*/
+
 }
