@@ -9,6 +9,7 @@ public class SpeedPowerUp : MonoBehaviour
     private ReturnerCurrentSpeed _returnerCurrentSpeed;
     private bool _isUsed = false;
     public event Action OnPickUp;
+    public event Action<SpeedPowerUp> OnRemoveEffect;
     public void OnTriggerEnter2D(Collider2D other)
     {
         other.TriggerEntity<PlayerInitializer>((player) =>
@@ -29,6 +30,7 @@ public class SpeedPowerUp : MonoBehaviour
     {
         yield return new WaitForSeconds(_duration);
         player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Remove(_returnerCurrentSpeed);
+        OnRemoveEffect?.Invoke(this);
         Destroy(gameObject);
     }
 
