@@ -15,7 +15,7 @@ public class PlayerMovement : IMove
 
     public void Move()
     {
-        _transform.position += ReturnerVector.ReturnVector();
+        _transform.position = ReturnerVector.ReturnVector();
     }
 
 }
