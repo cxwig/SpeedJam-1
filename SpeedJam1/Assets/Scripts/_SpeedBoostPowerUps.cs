@@ -28,8 +28,9 @@ public class _SpeedBoostPowerUps : MonoBehaviour
             // Mark the powerup as collected
             hasBoosted = true;
 
-            // Destroy the powerup object
-            Destroy(gameObject);
+            gameObject.GetComponent<Renderer>().enabled = false;
+
+            // Hide the powerup
         }
     }
 
@@ -39,6 +40,9 @@ public class _SpeedBoostPowerUps : MonoBehaviour
 
         // Reduce the player's speed to normal
         script.moveSpeed -= speedBoostAmount;
+
+        // Destroy the powerup object
+        Destroy(gameObject);
     }
 }
 
