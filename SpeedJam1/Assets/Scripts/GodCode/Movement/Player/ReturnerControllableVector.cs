@@ -11,6 +11,6 @@ public class ReturnerControllableVector : IReturnerVector
         _transform = transform;
         ReturnerSpeed = returnerSpeed;
     }
-    public Vector3 ReturnVector() => _transform.position + new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * ReturnerSpeed.ReturnSpeed();
+    public Vector3 ReturnVector() => new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0) * ReturnerSpeed.ReturnSpeed();
 
 }
