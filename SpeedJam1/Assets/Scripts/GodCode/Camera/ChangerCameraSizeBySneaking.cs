@@ -8,13 +8,13 @@ public class ChangerCameraSizeBySneaking : MonoBehaviour
     [SerializeField] private float _increaseDuration = 2;
     [SerializeField] private float _decreaseDuration = 3;
     [SerializeField] private float _minSize = 3.6f;
-    [SerializeField] private GetterPlayerMove _getterPlayerMove;
+    [SerializeField] private ChangerPlayerState _changerPlayerState;
     private ChangerSizeOfCamera _changerSizeOfCamera;
     private void Awake()
     {
         _changerSizeOfCamera = new ChangerSizeOfCamera(_camera);
-        _getterPlayerMove.OnMove += StartIncreasingSizeOfCamera;
-        _getterPlayerMove.OnSneak += StartReturnuingStartSize;
+        _changerPlayerState.OnMove += StartIncreasingSizeOfCamera;
+        _changerPlayerState.OnSneak += StartReturnuingStartSize;
     }
     private void StartReturnuingStartSize() => StartCoroutine(_changerSizeOfCamera.ChangerSizeOfCameraByTime(() => _camera.orthographicSize > _minSize, -1, _decreaseDuration));
     
@@ -22,7 +22,7 @@ public class ChangerCameraSizeBySneaking : MonoBehaviour
     
     private void OnDisable()
     {
-        _getterPlayerMove.OnMove -= StartIncreasingSizeOfCamera;
-        _getterPlayerMove.OnSneak -= StartReturnuingStartSize;
+        _changerPlayerState.OnMove -= StartIncreasingSizeOfCamera;
+        _changerPlayerState.OnSneak -= StartReturnuingStartSize;
     }
 }
