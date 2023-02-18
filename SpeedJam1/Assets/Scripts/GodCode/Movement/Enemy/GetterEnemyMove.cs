@@ -20,7 +20,7 @@ public class GetterEnemyMove : MonoBehaviour, IGetterMove
     private void GetChangerEnemyState()
     {
         ChangerEnemyState changerEnemyState = new ChangerEnemyState(transform, _target, _range, new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target, new ReturnerSpeed(_speed))),
-new PlayerMovement(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
+new TransformMove(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
         IMove move = changerEnemyState.GetMove();
         if (Move == null || move.GetType() != Move.GetType())
         {

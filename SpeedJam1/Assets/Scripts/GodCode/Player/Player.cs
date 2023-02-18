@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     {
         _move = move;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         _move?.Move();
     }

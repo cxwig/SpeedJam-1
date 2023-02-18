@@ -5,6 +5,7 @@ using UnityEngine;
 public class GetterPlayerMove : MonoBehaviour, IGetterMove
 {
     [SerializeField] private float _speed;
+    [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private float _slowlyMovement = 0.5f;
     private ReturnerCurrentSpeed _returnerCurrentSpeed;
     private ReturnerCurrentSpeed _slowlyReturnerSpeed;
@@ -15,7 +16,7 @@ public class GetterPlayerMove : MonoBehaviour, IGetterMove
     {
         if(Move == null)
         {
-            Move = new PlayerMovement(transform, new ReturnerControllableVector(transform, new ReturnerMultiplySpeeds()));
+            Move = new RigidbodyMovement(transform, _rigidbody2D, new ReturnerControllableVector(transform, new ReturnerMultiplySpeeds()));
             _returnerCurrentSpeed = ReturnDeltaSpeed();
             Move.ReturnerVector.ReturnerSpeed.Add(_returnerCurrentSpeed);
         }
@@ -42,5 +43,5 @@ public class GetterPlayerMove : MonoBehaviour, IGetterMove
         Move.ReturnerVector.ReturnerSpeed.Add(returnerCurrentSpeed2);
 
     }
-    private ReturnerCurrentSpeed ReturnDeltaSpeed(float factor = 1) => new ReturnerDeltaTimeSpeed(new ReturnerSpeed(_speed * factor));
+    private ReturnerCurrentSpeed ReturnDeltaSpeed(float factor = 1) => new ReturnerSpeed(_speed * factor);
 }
