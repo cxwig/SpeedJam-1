@@ -45,18 +45,31 @@ namespace AkshayDhotre.GraphicSettingsMenu
 
         }
 
+        /// <summary>
+        /// Save the settings using the XmlManager
+        /// </summary>
         /// <param name="dataToSave"></param>
         public void SaveSettings(GraphicSettingDataContainer dataToSave)
         {
             XmlManager<GraphicSettingDataContainer>.Save(dataToSave, filePath, fileName);
         }
 
+        /// <summary>
+        /// Check if the file exists, if yes the it is assigned to dataToLoad
+        /// else defaultDataContainer is assigned to dataToLoad and then saved to create the file
+        /// </summary>
         /// <param name="dataToLoad"></param>
         public void LoadSettings(out GraphicSettingDataContainer dataToLoad)
         {
             GraphicSettingDataContainer tempData = XmlManager<GraphicSettingDataContainer>.Load(filePath + fileName, new GraphicSettingDataContainer());
             dataToLoad = tempData;
         }
+
+
+        /// <summary>
+        /// Check if the file exists
+        /// </summary>
+        /// <returns></returns>
         public bool FileExists()
         {
             if (XmlManager<GraphicSettingDataContainer>.FileExists(filePath + fileName))
