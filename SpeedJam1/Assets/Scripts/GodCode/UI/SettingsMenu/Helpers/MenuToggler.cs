@@ -12,15 +12,15 @@ namespace AkshayDhotre.GraphicSettingsMenu
 
         public void ButtonCheckSettings()
         {
-                if (menuCanvasComponent.enabled)
-                {
-                    SetMenuActive(false);
-                }
-                else
-                {
-                    SetMenuActive(true);
-                    
-                }
+            if (menuCanvasComponent.enabled)
+            {
+                SetMenuActive(false);
+            }
+            else
+            {
+                SetMenuActive(true);
+
+            }
         }
 
         /// <param name="active"></param>
