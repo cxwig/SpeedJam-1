@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : IMove
+public class TransformMove : IMove
 {
     private Transform _transform;
     public IReturnerVector ReturnerVector { get; set; }
-    
-    public PlayerMovement(Transform transform, IReturnerVector returnerVector)
+
+    public TransformMove(Transform transform, IReturnerVector returnerVector)
     {
         _transform = transform;
         ReturnerVector = returnerVector;
@@ -15,7 +15,8 @@ public class PlayerMovement : IMove
 
     public void Move()
     {
-        _transform.position += ReturnerVector.ReturnVector();
+        _transform.position = ReturnerVector.ReturnVector();
     }
+
 
 }

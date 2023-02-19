@@ -7,7 +7,7 @@ public class GetterEnemyMove : MonoBehaviour, IGetterMove
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _range;
-    [SerializeField] private Transform _target;
+    [SerializeField] private SetterSneakingMove _target;
     [SerializeField] private Transform _firstPoint;
     [SerializeField] private Transform _secondPoint;
     [SerializeField] private NavMeshAgent _navMeshAgent;
@@ -19,8 +19,8 @@ public class GetterEnemyMove : MonoBehaviour, IGetterMove
     }
     private void GetChangerEnemyState()
     {
-        ChangerEnemyState changerEnemyState = new ChangerEnemyState(transform, _target, _range, new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target, new ReturnerSpeed(_speed))),
-new PlayerMovement(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
+        ChangerEnemyState changerEnemyState = new ChangerEnemyState(_target,transform, _target.transform, _range, new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target.transform, new ReturnerSpeed(_speed))),
+new TransformMove(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
         IMove move = changerEnemyState.GetMove();
         if (Move == null || move.GetType() != Move.GetType())
         {

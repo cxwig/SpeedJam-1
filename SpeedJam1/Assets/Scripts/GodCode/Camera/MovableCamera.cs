@@ -10,7 +10,7 @@ public class MovableCamera : MonoBehaviour
     {
         _move = move;
     }
-    private void Update()
+    private void LateUpdate()
     {
         _move?.Move();
     }

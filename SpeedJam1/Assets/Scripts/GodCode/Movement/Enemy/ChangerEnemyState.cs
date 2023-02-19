@@ -9,8 +9,10 @@ public class ChangerEnemyState
     private IMove _partolMove;
     private Transform _transform;
     private Transform _target;
-    public ChangerEnemyState(Transform transform, Transform target, float range, IMove followongTargetMove, IMove partolMove)
+    private SetterSneakingMove _setterSneakingMove;
+    public ChangerEnemyState(SetterSneakingMove setterSneakingMove, Transform transform, Transform target, float range, IMove followongTargetMove, IMove partolMove)
     {
+        _setterSneakingMove = setterSneakingMove;
         _transform = transform;
         _target = target;
         _range = range;
@@ -20,6 +22,6 @@ public class ChangerEnemyState
 
     public IMove GetMove()
     {
-       return Vector2.Distance(_transform.position, _target.position) < _range ? _followingTargetMove : _partolMove;
+       return Vector2.Distance(_transform.position, _target.position) < _range && _setterSneakingMove.IsSneaking == false? _followingTargetMove : _partolMove;
     }
 }

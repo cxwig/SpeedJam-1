@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 630913147642575042}
   - component: {fileID: 630913147642575043}
   - component: {fileID: 630913147642575040}
+  - component: {fileID: 4184553866918911133}
+  - component: {fileID: 8299899380656871871}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -127,7 +129,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -161,6 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4.5
+  _rigidbody2D: {fileID: 630913147642575041}
+  _slowlyMovement: 0.5
 --- !u!114 &630913147642575040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,3 +177,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7925be9019c29341850a75776bda0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4184553866918911133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630913147642575051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed73398a6d759f9489e471142398716c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8299899380656871871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630913147642575051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e64db6ba1a6270408100b17152093dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _changerPlayerState: {fileID: 4184553866918911133}
