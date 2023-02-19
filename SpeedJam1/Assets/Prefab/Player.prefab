@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.6797532, g: 0.0788092, b: 0.7264151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -164,7 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4.5
   _rigidbody2D: {fileID: 630913147642575041}
-  _slowlyMovement: 0.5
 --- !u!114 &630913147642575040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,3 +201,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changerPlayerState: {fileID: 4184553866918911133}
+  _slowlyMovement: 0.5
