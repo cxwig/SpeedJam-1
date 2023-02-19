@@ -7,6 +7,7 @@ public class _WindowPointer : MonoBehaviour
     [SerializeField] private Camera uiCamera;
     [SerializeField] private Sprite arrowSprite;
     [SerializeField] private Sprite crossSprite;
+    [SerializeField] private float _additionalAngle = 45;
     private Vector3 targetPosition;
     private RectTransform pointerRectTransform;
     private Image pointerImage; 
@@ -56,7 +57,7 @@ public class _WindowPointer : MonoBehaviour
         fromPosition.z = 0f;
         Vector3 dir = (toPosition - fromPosition).normalized;
         float angle = UtilsClass.GetAngleFromVectorFloat(dir);
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle);
+        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle + _additionalAngle);
     }
 
     public void Hide()

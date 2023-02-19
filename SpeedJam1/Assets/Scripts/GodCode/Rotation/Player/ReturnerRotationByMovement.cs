@@ -17,7 +17,7 @@ public class ReturnerRotationByMovement : IReturnerRotation
     public Vector3 ReturnRotation()
     {
         Vector3 size = _scale.localScale;
-        float xOfVector = _returnerVector.ReturnVector().x;
+        float xOfVector = Input.GetAxis("Horizontal"); // _returnerVector.ReturnVector().x;
         if (xOfVector.IsEqualZero() == false)
         {
              size = Flip(_startScale, false,xOfVector, _scale.localScale.y);
