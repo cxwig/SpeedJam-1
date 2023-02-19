@@ -61,6 +61,7 @@ public class _WindowPointer : MonoBehaviour
 
     public void Hide()
     {
+        Debug.Log("HIDE!!");
         gameObject.SetActive(false);
     }
 

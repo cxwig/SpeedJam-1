@@ -10,4 +10,8 @@ public class Stopwatch : MonoBehaviour
     {
         CurrentTime += Time.deltaTime;
     }
+    public void IncreaseTime(RaiserValue raiserValue)
+    {
+        CurrentTime += raiserValue.AdditionalValue();
+    }
 }
