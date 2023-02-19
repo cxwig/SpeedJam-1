@@ -20,8 +20,10 @@ public class ChangerEnemyState
         _partolMove = partolMove;
     }
 
-    public IMove GetMove()
+    public IMove GetMove(IMove followongTargetMove, IMove partolMove)
     {
-       return Vector2.Distance(_transform.position, _target.position) < _range && _setterSneakingMove.IsSneaking == false? _followingTargetMove : _partolMove;
+        bool canFollow = Vector2.Distance(_transform.position, _target.position) < _range && _setterSneakingMove.IsSneaking == false;
+        Debug.LogError(canFollow + " OLOL! IS SNEAKING: " + _setterSneakingMove.IsSneaking);
+       return canFollow ? followongTargetMove : partolMove;
     }
 }

@@ -12,16 +12,18 @@ public class GetterEnemyMove : MonoBehaviour, IGetterMove
     [SerializeField] private Transform _secondPoint;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     private IMove _previusMove;
+    ChangerEnemyState changerEnemyState;
     public IMove Move { get; private set; }
     private void Awake()
     {
+        changerEnemyState = new ChangerEnemyState(_target, transform, _target.transform, _range, new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target.transform, new ReturnerSpeed(_speed))),
+new TransformMove(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
         GetChangerEnemyState();
     }
     private void GetChangerEnemyState()
     {
-        ChangerEnemyState changerEnemyState = new ChangerEnemyState(_target,transform, _target.transform, _range, new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target.transform, new ReturnerSpeed(_speed))),
+        IMove move = changerEnemyState.GetMove(new EnemyMove(_navMeshAgent, new ReturnerTargetVector(_target.transform, new ReturnerSpeed(_speed))),
 new TransformMove(transform, new ReturnerEnemyPatrolVector(transform, _firstPoint, _secondPoint, new ReturnerSpeed(_speed))));
-        IMove move = changerEnemyState.GetMove();
         if (Move == null || move.GetType() != Move.GetType())
         {
             _navMeshAgent.enabled = move is EnemyMove;

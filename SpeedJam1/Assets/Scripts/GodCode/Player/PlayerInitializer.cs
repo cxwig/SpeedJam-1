@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Player))]
-[RequireComponent(typeof(IGetterMove))]
+[RequireComponent(typeof(GetterPlayerMove))]
 public class PlayerInitializer : MonoBehaviour
 {
     private Player _player;
     private IGetterRotation _getterRotation;
-    public IGetterMove GetterMove { get; private set; }
+    public GetterPlayerMove GetterMove { get; private set; }
     private void Awake()
     {
-        GetterMove = GetComponent<IGetterMove>();
+        GetterMove = GetComponent<GetterPlayerMove>();
         _getterRotation = GetComponent<IGetterRotation>();
         _player = GetComponent<Player>();
         Initialize();

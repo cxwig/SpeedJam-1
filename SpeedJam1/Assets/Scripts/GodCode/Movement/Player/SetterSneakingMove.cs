@@ -17,17 +17,21 @@ public class SetterSneakingMove : MonoBehaviour
     }
     private void Sneak()
     {
+        IsSneaking = true;
         _slowlyReturnerSpeed = _getterMove.ReturnDeltaSpeed(_slowlyMovement);
         _getterMove.Move.ReturnerVector.ReturnerSpeed.Add(_slowlyReturnerSpeed);
         //ReplaceReturnerSpeed(_getterMove.ReturnerCurrentSpeed, _slowlyReturnerSpeed);
-        IsSneaking = true;
     }
     private void Move()
     {
+        IsSneaking = false;
         Debug.Log(" YOU HERE " + _slowlyReturnerSpeed + " ? " + _getterMove.ReturnerCurrentSpeed);
         _getterMove.Move.ReturnerVector.ReturnerSpeed.Remove(_slowlyReturnerSpeed);
         // ReplaceReturnerSpeed(_slowlyReturnerSpeed, _getterMove.ReturnerCurrentSpeed);
-        IsSneaking = false;
+    }
+    private void Update()
+    {
+        Debug.LogError(IsSneaking + " YEAH!");
     }
     private void OnDisable()
     {
