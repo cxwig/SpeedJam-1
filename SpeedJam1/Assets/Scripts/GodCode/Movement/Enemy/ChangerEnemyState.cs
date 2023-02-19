@@ -10,6 +10,7 @@ public class ChangerEnemyState
     private Transform _transform;
     private Transform _target;
     private SetterSneakingMove _setterSneakingMove;
+    private bool _canFollow;
     public ChangerEnemyState(SetterSneakingMove setterSneakingMove, Transform transform, Transform target, float range, IMove followongTargetMove, IMove partolMove)
     {
         _setterSneakingMove = setterSneakingMove;
@@ -22,8 +23,9 @@ public class ChangerEnemyState
 
     public IMove GetMove(IMove followongTargetMove, IMove partolMove)
     {
-        bool canFollow = Vector2.Distance(_transform.position, _target.position) < _range && _setterSneakingMove.IsSneaking == false;
-        Debug.LogError(canFollow + " OLOL! IS SNEAKING: " + _setterSneakingMove.IsSneaking);
+        bool canFollow = Vector2.Distance(_transform.position, _target.position) < _range && (_setterSneakingMove.IsSneaking == false || _canFollow);
+        _canFollow = canFollow;
+        //Debug.LogError(canFollow + " OLOL! IS SNEAKING: " + _setterSneakingMove.IsSneaking);
        return canFollow ? followongTargetMove : partolMove;
     }
 }

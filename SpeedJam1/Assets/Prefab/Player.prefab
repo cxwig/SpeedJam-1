@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _changerPlayerState: {fileID: 4184553866918911133}
-  _slowlyMovement: 0.5
+  _slowlyMovement: -0.5
 --- !u!95 &5758513663016899257
 Animator:
   serializedVersion: 5
