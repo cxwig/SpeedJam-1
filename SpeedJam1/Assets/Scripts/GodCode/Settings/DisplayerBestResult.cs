@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DisplayerBestResult : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI _text;
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetterBestTimeHandler getterBestTimeHandler = new GetterBestTimeHandler();
+        var result = getterBestTimeHandler.GetBestResult();
+        if (result.Item1 == false)
+        {
+            _text.gameObject.SetActive(false);
+        }
+        _text.text = result.Item2.ToString();
     }
 }

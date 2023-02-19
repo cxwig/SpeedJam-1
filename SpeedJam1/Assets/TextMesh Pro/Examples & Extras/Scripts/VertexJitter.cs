@@ -44,10 +44,21 @@ namespace TMPro.Examples
 
         void Start()
         {
-            StartCoroutine(AnimateVertexColors());
+          //  ContinieMoving();
         }
 
-
+        public void Stop()
+        {
+           _isNormal = false;
+            StopCoroutine(AnimateVertexColors());
+        }
+        public void ContinieMoving()
+        {
+            _isNormal = true;
+            hasTextChanged = true;
+            StartCoroutine(AnimateVertexColors());
+        }
+        private bool _isNormal;
         void ON_TEXT_CHANGED(Object obj)
         {
             if (obj == m_TextComponent)
@@ -58,7 +69,7 @@ namespace TMPro.Examples
         /// Method to animate vertex colors of a TMP Text object.
         /// </summary>
         /// <returns></returns>
-        IEnumerator AnimateVertexColors()
+        public IEnumerator AnimateVertexColors()
         {
 
             // We force an update of the text object since it would only be updated at the end of the frame. Ie. before this code is executed on the first frame.
@@ -83,7 +94,7 @@ namespace TMPro.Examples
             // Cache the vertex data of the text object as the Jitter FX is applied to the original position of the characters.
             TMP_MeshInfo[] cachedMeshInfo = textInfo.CopyMeshInfoVertexData();
 
-            while (true)
+            while (_isNormal)
             {
                 // Get new copy of vertex data if the text has changed.
                 if (hasTextChanged)
