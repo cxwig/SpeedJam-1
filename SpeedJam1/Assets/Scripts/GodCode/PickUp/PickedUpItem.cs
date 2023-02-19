@@ -1,13 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
-
 public class PickedUpItem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _pickUpText;
 
     [SerializeField] private KeyCode _pickUpKey = KeyCode.F;
+    public event Action OnPickUp;
     private void Start()
     {
         Disactive();
@@ -38,6 +38,7 @@ public class PickedUpItem : MonoBehaviour
     private void Active() => _pickUpText.gameObject.SetActive(true);
     private void PickUp()
     {
+        OnPickUp?.Invoke();
         Destroy(gameObject);
     }
 

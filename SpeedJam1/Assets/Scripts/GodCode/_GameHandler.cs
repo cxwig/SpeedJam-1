@@ -6,11 +6,11 @@ using CodeMonkey.Utils;
 public class _GameHandler : MonoBehaviour
 {
     [SerializeField] private _WindowPointer windowPointer;
-
+    [SerializeField] private Transform _point;
     // this doesnt work fix juno please..
     private void Start()
     {
-        windowPointer.Show(new Vector3(5, 20));
+        windowPointer.Show(_point.position);
 
         int state = 0;
         FunctionUpdater.Create(() =>
@@ -18,7 +18,7 @@ public class _GameHandler : MonoBehaviour
             switch (state)
             {
                 case 0:
-                    if (Vector3.Distance(Camera.main.transform.position, new Vector3(5, 20)) < 10)
+                    if (Vector3.Distance(Camera.main.transform.position, _point.position) < 10)
                     {
                         windowPointer.Show(new Vector3(5, -50));
                         state = 1;
