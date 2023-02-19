@@ -985,7 +985,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1534406376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2021617194}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1554065080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a513ef157a2e14740b44e1859629bc67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loaderUI: {fileID: 1806420978}
+  sliderLoad: {fileID: 1428052536}
 --- !u!114 &2021617195
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class _WindowPointer : MonoBehaviour
     private void Update()
     {
 
-        float BorderSize = 45f;
+        float BorderSize = 198f;
         Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
         bool isOffScreen = targetPositionScreenPoint.x <= BorderSize || targetPositionScreenPoint.x >= Screen.width - BorderSize || targetPositionScreenPoint.y <= BorderSize || targetPositionScreenPoint.y >= Screen.height - BorderSize;
         Debug.Log(isOffScreen + " " + targetPositionScreenPoint);
