@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5965017393262293912}
-  _radius: 4
+  _radius: 2
 --- !u!61 &3938915461645826186
 BoxCollider2D:
   m_ObjectHideFlags: 0
