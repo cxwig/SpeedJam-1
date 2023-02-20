@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class WinnerGameItem : MonoBehaviour
 {
     [SerializeField] private Stopwatch _stopwatch;
+    public event Action OnWin;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collision.TriggerEntity<Player>((player) =>
@@ -16,6 +17,7 @@ public class WinnerGameItem : MonoBehaviour
             {
                 result.Item2 = _stopwatch.CurrentTime;
                 Saver<SavableBestTime>.Save(new SavableBestTime(result.Item2.ToString()));
+                OnWin?.Invoke();
             } 
         });
     }

@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class ShowerGameOver : MonoBehaviour
+public class WinScreen : MonoBehaviour
 {
-    [SerializeField] private EnemyCollector _enemyCollector;
+    [SerializeField] private WinnerGameItem _winner;
     [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private Animator _animator;
     private bool _isTrigged;
-    private void Start()
+    private void Awake()
     {
-        _enemyCollector.OnEndGame += DisplayGameOver;
+        _winner.OnWin += DisplayWin;
     }
-    private void DisplayGameOver()
+    private void DisplayWin()
     {
         if (_isTrigged == false)
         {
             _canvasGroup.ChangeStateOfCanvasGroup(true);
-            _animator.SetTrigger("Fall");
             StartCoroutine(CoolDown());
         }
     }
@@ -26,10 +23,5 @@ public class ShowerGameOver : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("MainMenu");
-    }
-
-    private void OnDisable()
-    {
-        _enemyCollector.OnEndGame -= DisplayGameOver;
     }
 }
