@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Vignette
+    uniqueID: 1837801915
+    locked: 0

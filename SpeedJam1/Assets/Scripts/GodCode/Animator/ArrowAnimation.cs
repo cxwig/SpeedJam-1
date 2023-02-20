@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class ArrowAnimation : MonoBehaviour
 {
+    [SerializeField] private ShineAnimator _shineAnimator;
+    [SerializeField] private _WindowPointer _windowPointer;
+    [SerializeField] private Vector2 _size = new Vector2(0.7765307f, 0.7765307f);
+    private Vector2 _startSize;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Vector2Int _bordersForCoolDown = new Vector2Int(6, 10);
-    private int _coolDown;
-    private float _time;
     private void Awake()
     {
-        GetRandomCoolDown();
+        _startSize = transform.localScale;
+        Debug.Log("YEAH1");
     }
-    private void GetRandomCoolDown() => _coolDown = Random.Range(_bordersForCoolDown.x, _bordersForCoolDown.y);
-    private void Update()
+    public void PlayCross()
     {
-        _time += Time.deltaTime;
-        if (_time > _coolDown)
-        {
-
-            _animator.SetTrigger("Shine");
-            GetRandomCoolDown();
-            _time = 0;
-        }
+        _shineAnimator.IsAbleToShine = false;
+        transform.localScale = _size;
+        Debug.Log("CROSS!");
+        _animator.SetBool("isCross",true);
     }
+    public void PlayArrow()
+    {
+        Debug.Log("ARROW!");
+        transform.localScale = _startSize;
+        _shineAnimator.IsAbleToShine = true;
+        _animator.SetBool("isCross", false);
+    }
+
 
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using CodeMonkey.Utils;
 public class _WindowPointer : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class _WindowPointer : MonoBehaviour
     [SerializeField] private float _additionalAngle = 45;
     private Vector3 targetPosition;
     private RectTransform pointerRectTransform;
-    private Image pointerImage; 
-
+    private Image pointerImage;
+    [SerializeField] private ArrowAnimation _arrowAnimation;
+    public event Action OnLeftSceen;
+    public event Action OnGetIntoScreen;
+    private bool _isOffScreen;
     private void Awake()
     {
         pointerRectTransform = transform.Find("Pointer").GetComponent<RectTransform>();
@@ -26,11 +30,21 @@ public class _WindowPointer : MonoBehaviour
         float BorderSize = 45f;
         Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
         bool isOffScreen = targetPositionScreenPoint.x <= BorderSize || targetPositionScreenPoint.x >= Screen.width - BorderSize || targetPositionScreenPoint.y <= BorderSize || targetPositionScreenPoint.y >= Screen.height - BorderSize;
-
+        if (isOffScreen != _isOffScreen)
+        {
+            if (isOffScreen)
+            {
+                _arrowAnimation.PlayArrow();
+            }
+            else
+            {
+                _arrowAnimation.PlayCross();
+            }
+        }
         if (isOffScreen)
         {
             RotateToPointerTargetPosition();
-            pointerImage.sprite = arrowSprite;
+            // pointerImage.sprite = arrowSprite;
             Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
             if (cappedTargetScreenPosition.x <= BorderSize) cappedTargetScreenPosition.x = BorderSize;
             if (cappedTargetScreenPosition.x >= Screen.width - BorderSize) cappedTargetScreenPosition.x = Screen.width - BorderSize;
@@ -43,12 +57,13 @@ public class _WindowPointer : MonoBehaviour
         }
         else
         {
-            pointerImage.sprite = crossSprite;
+            //  pointerImage.sprite = crossSprite;
             Vector3 pointerInWorldPosition = uiCamera.ScreenToWorldPoint(targetPositionScreenPoint);
             pointerRectTransform.position = pointerInWorldPosition;
             pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
             pointerRectTransform.localEulerAngles = Vector3.zero;
         }
+        _isOffScreen = isOffScreen;
     }
     private void RotateToPointerTargetPosition()
     {

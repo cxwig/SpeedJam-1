@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,36 +7,37 @@ public class Box : MonoBehaviour
 {
     [SerializeField] private SetterSneakingMove _sneakingMove;
     private bool _isEntered;
+    [SerializeField] private Animator _animator;
     private PlayerInitializer _player;
     [SerializeField] private float _radius = 4;
     [SerializeField] private BoxCollider2D _boxCollider2D;
-    private void OnTriggerStay2D(Collider2D other)
+    private SpriteRenderer _playerSpriteRenderer;
+    public event Action OnExit;
+    public event Action OnEnter;
+    private void OnTriggerEnter2D(Collider2D other)
     {
         other.TriggerEntity<PlayerInitializer>((player) =>
         {
-            if (_sneakingMove.IsSneaking && _isEntered == false)
+            player.Player.Initialize(new StoppedBehaviur());
+            player.GetterMove.ResetVelocity();
+            _player = player;
+            _isEntered = true;
+            if (_playerSpriteRenderer == null)
             {
-                _player = player;
-                Debug.Log("HOORAY!!");
-                _isEntered = true;
-                _boxCollider2D.enabled = false;
-                //player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Remove(player.GetterMove.ReturnerCurrentSpeed);
+                _playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
             }
+            _playerSpriteRenderer.enabled = false;
+            OnEnter?.Invoke();
         });
     }
-
-
-    private void OnTriggerExit2D(Collider2D other)
+    private void Update()
     {
-        other.TriggerEntity<PlayerInitializer>((player) =>
+        if (Input.GetKeyDown(KeyCode.Q) && _isEntered)
         {
-            if (_isEntered)
-            {
-               // player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Add(player.GetterMove.ReturnerCurrentSpeed);
-                _isEntered = false;
-                _boxCollider2D.enabled = true;
-                _player = null;
-            }
-        });
+            _playerSpriteRenderer.enabled = true;
+            _player.Initialize();
+            _isEntered = false;
+            OnExit?.Invoke();
+        }
     }
 }
