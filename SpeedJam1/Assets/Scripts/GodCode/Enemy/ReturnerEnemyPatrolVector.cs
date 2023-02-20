@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ReturnerEnemyPatrolVector : IReturnerVector
 {
+    private readonly float _radius = 2;
     private List<Transform> _points; 
     private Transform _transform;
     private Transform _currentPoint;
@@ -19,7 +20,7 @@ public class ReturnerEnemyPatrolVector : IReturnerVector
     }
     public Vector3 ReturnVector()
     {
-        if (_transform.position == _currentPoint.position)
+        if (Vector2.Distance(_transform.position, _currentPoint.position) < _radius)
         {
             GetRandomCurrentPoint();
         }
