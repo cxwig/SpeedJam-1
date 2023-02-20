@@ -17,6 +17,8 @@ public class GetterEnemyMove : MonoBehaviour, IGetterMove
     private EnemyMove _enemyMove;
     public ReturnerEnemyPatrolVector ReturnerEnemyPatrolVector { get; private set; }
     public IMove Move { get; private set; }
+    public List<Transform> Points { get => _points; set => _points = value; }
+
     public event Action OnChangeState;
     public event Action OnUpdate;
     private void Awake()

@@ -392,6 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33de686ce5f1854685de097a32d6b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meshAgent: {fileID: 2644047351631930258}
+  _getterEnemyMove: {fileID: 3143390879891694237}
 --- !u!114 &3143390879891694237
 MonoBehaviour:
   m_ObjectHideFlags: 0
