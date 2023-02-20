@@ -1,39 +1,34 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ReturnerEnemyPatrolVector : IReturnerVector
 {
-    private Transform _firstPoint;
-    private Transform _secondPoint;
+    private List<Transform> _points; 
     private Transform _transform;
-    private Vector3 _currentPoint;
+    private Transform _currentPoint;
     public ReturnerCurrentSpeed ReturnerSpeed { get; set; }
-    public ReturnerEnemyPatrolVector(Transform transform, Transform firstPoint, Transform secondPoint, ReturnerCurrentSpeed returnerCurrentSpeed)
+    public Transform CurrentPoint { get => _currentPoint; set => _currentPoint = value; }
+    public event Action OnGetNewPoint;
+    public ReturnerEnemyPatrolVector(Transform transform, List<Transform> points, ReturnerCurrentSpeed returnerCurrentSpeed)
     {
         _transform = transform;
-        _firstPoint = firstPoint;
-        _secondPoint = secondPoint;
-        _currentPoint = firstPoint.position;
-        float distanceToFirstPoint = Vector2.Distance(_transform.position, _firstPoint.position);
-        float distanceToSecondPoint = Vector2.Distance(_transform.position, _secondPoint.position);
-        if (distanceToFirstPoint > distanceToSecondPoint)
-        {
-            _currentPoint = secondPoint.position;
-        }
+        _points = points;
+        GetRandomCurrentPoint();
         ReturnerSpeed = returnerCurrentSpeed;
     }
     public Vector3 ReturnVector()
     {
-        if (_transform.position == _secondPoint.position)
+        if (_transform.position == _currentPoint.position)
         {
-            _currentPoint = _firstPoint.position;
+            GetRandomCurrentPoint();
         }
-        else if (_transform.position == _firstPoint.position)
-        {
-            _currentPoint = _secondPoint.position;
-        }
-       return Vector3.MoveTowards(_transform.position, _currentPoint,ReturnerSpeed.ReturnSpeed() * Time.deltaTime);
+       return Vector3.MoveTowards(_transform.position, _currentPoint.position,ReturnerSpeed.ReturnSpeed() * Time.deltaTime);
+    }
+    private void GetRandomCurrentPoint()
+    {
+        OnGetNewPoint?.Invoke();
+        _currentPoint = _points.GetRandomElementOfList();
     }
 
 }

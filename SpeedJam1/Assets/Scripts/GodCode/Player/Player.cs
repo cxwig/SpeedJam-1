@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-   // private IMove _move;
-   // private IRotation _rotation;
-    private IBehaviour _behaviour;
-    public void Initialize(IBehaviour behaviour)//IMove move, IRotation rotation)
+    public IBehaviour Behaviour { get; private set; }
+
+    public void Initialize(IBehaviour behaviour)
     {
-        _behaviour = behaviour;
-        //_move = move;
-        //_rotation = rotation;
+        Behaviour = behaviour;
     }
-    private void Update()
-    {
-        ///_rotation.Rotate();
-    }
+
     private void FixedUpdate()
     {
-        _behaviour.Behave();
-        //_move?.Move();
+        Behaviour.Behave();
     }
 }

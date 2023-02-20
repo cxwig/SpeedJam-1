@@ -13,11 +13,11 @@ public class BoxAnimator : MonoBehaviour
     }
     private void PlayJumpIntoBoxAnimation()
     {
-        _animator.SetTrigger("Jump");
+        _animator.SetBool("isOpened", false);
     }
     private void PlayOpenBoxAnimation()
     {
-
+        _animator.SetBool("isOpened", true);
     }
     private void OnDisable()
     {

@@ -9,12 +9,10 @@ public class ChangerEnemyState
     private IMove _partolMove;
     private Transform _transform;
     private Transform _target;
-    private SetterSneakingMove _setterSneakingMove;
     private bool _canFollow;
     private IMove _lastMove;
     public ChangerEnemyState(SetterSneakingMove setterSneakingMove, Transform transform, Transform target, float range, IMove followongTargetMove, IMove partolMove)
     {
-        _setterSneakingMove = setterSneakingMove;
         _transform = transform;
         _target = target;
         _range = range;
@@ -23,14 +21,9 @@ public class ChangerEnemyState
         _lastMove = _partolMove;
     }
 
-    public IMove GetMove(IMove followongTargetMove, IMove partolMove)
+    public IMove GetMove(IMove followongTargetMove, IMove partolMove, bool isSneaking, bool isStopped)
     {
-        //  bool canFollow = Vector2.Distance(_transform.position, _target.position) < _range && (_setterSneakingMove.IsSneaking == false || _canFollow);
-        // _canFollow = canFollow;
-        //Debug.LogError(canFollow + " OLOL! IS SNEAKING: " + _setterSneakingMove.IsSneaking);
-        // return canFollow ? followongTargetMove : partolMove;
-        Debug.Log(_setterSneakingMove.IsSneaking + " HAHAH!");
-        if (Vector2.Distance(_transform.position, _target.position) < _range && (_lastMove.GetType() == followongTargetMove.GetType() || _setterSneakingMove.IsSneaking))
+        if (Vector2.Distance(_transform.position, _target.position) < _range && (_lastMove.GetType() == followongTargetMove.GetType() || isSneaking == false) && isStopped == false)
         {
             _lastMove = _followingTargetMove;
             return followongTargetMove;

@@ -5,12 +5,8 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    [SerializeField] private SetterSneakingMove _sneakingMove;
-    private bool _isEntered;
     [SerializeField] private Animator _animator;
     private PlayerInitializer _player;
-    [SerializeField] private float _radius = 4;
-    [SerializeField] private BoxCollider2D _boxCollider2D;
     private SpriteRenderer _playerSpriteRenderer;
     public event Action OnExit;
     public event Action OnEnter;
@@ -21,7 +17,6 @@ public class Box : MonoBehaviour
             player.Player.Initialize(new StoppedBehaviur());
             player.GetterMove.ResetVelocity();
             _player = player;
-            _isEntered = true;
             if (_playerSpriteRenderer == null)
             {
                 _playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
@@ -32,11 +27,10 @@ public class Box : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && _isEntered)
+        if (Input.GetKeyDown(KeyCode.Q) && _playerSpriteRenderer.enabled == false)
         {
             _playerSpriteRenderer.enabled = true;
             _player.Initialize();
-            _isEntered = false;
             OnExit?.Invoke();
         }
     }

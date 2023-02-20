@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GetterEnemyMove _getterEnemyMove;
+    [SerializeField] private Animator _animator;
+    private void Awake()
     {
-        
+        _getterEnemyMove.OnChangeState += PlayMoveAnimation;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void PlayMoveAnimation()
     {
-        
+        _animator.SetBool("isRunning", _getterEnemyMove.IsEnemyMove);
+    }
+    private void OnDisable()
+    {
+        _getterEnemyMove.OnChangeState -= PlayMoveAnimation;
     }
 }
