@@ -13,7 +13,7 @@ public class ShowerGameOver : MonoBehaviour
     {
         _enemyCollector.OnEndGame += DisplayGameOver;
     }
-    private void DisplayGameOver()
+    public void DisplayGameOver()
     {
         if (_isTrigged == false)
         {

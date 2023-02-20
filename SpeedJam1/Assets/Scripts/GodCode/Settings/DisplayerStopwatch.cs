@@ -9,6 +9,9 @@ public class DisplayerStopwatch : MonoBehaviour
     [SerializeField] private int _digits = 2;
     [SerializeField] private float _maxTime = 120;
     private float _time = 0;
+
+    public float MaxTime { get => _maxTime; set => _maxTime = value; }
+
     private void Update()
     {
         _time += Time.deltaTime;
