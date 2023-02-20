@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] private SetterSneakingMove _sneakingMove;
+    private bool _isEntered;
+    private PlayerInitializer _player;
+    [SerializeField] private float _radius = 4;
+    [SerializeField] private BoxCollider2D _boxCollider2D;
+    private void OnTriggerStay2D(Collider2D other)
     {
         other.TriggerEntity<PlayerInitializer>((player) =>
         {
-            player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Remove(player.GetterMove.ReturnerCurrentSpeed);
+            if (_sneakingMove.IsSneaking && _isEntered == false)
+            {
+                _player = player;
+                Debug.Log("HOORAY!!");
+                _isEntered = true;
+                _boxCollider2D.enabled = false;
+                //player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Remove(player.GetterMove.ReturnerCurrentSpeed);
+            }
         });
     }
+
+
     private void OnTriggerExit2D(Collider2D other)
     {
         other.TriggerEntity<PlayerInitializer>((player) =>
         {
-            player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Add(player.GetterMove.ReturnerCurrentSpeed);
+            if (_isEntered)
+            {
+               // player.GetterMove.Move.ReturnerVector.ReturnerSpeed.Add(player.GetterMove.ReturnerCurrentSpeed);
+                _isEntered = false;
+                _boxCollider2D.enabled = true;
+                _player = null;
+            }
         });
     }
 }
